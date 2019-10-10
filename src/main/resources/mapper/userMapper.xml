@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.wcnm.dao.UserMapper">
+
+
+    <resultMap id="BaseResultMap" type="com.example.wcnm.model.User">
+        <result column="haa01i" property="id" jdbcType="INTEGER"/>
+        <result column="haa02c" property="userName" jdbcType="VARCHAR"/>
+        <result column="haa03c" property="password" jdbcType="VARCHAR"/>
+        <result column="haa04b" property="sex" jdbcType="BIT"/>
+        <result column="haa05c" property="salt" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        haa01i,haa02c,haa03c,haa04b,haa05c
+    </sql>
+
+    <insert id="insert" parameterType="User">
+        insert into `haa` (haa02c,haa03c,haa04b,haa05c)
+        values (#{user.userName,jdbcType=VARCHAR},
+        #{user.password,jdbcType=VARCHAR},
+        #{user.sex,jdbcType=BIT},
+        #{user.salt,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="selectUserByUserName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `haa`
+        where haa02c=#{username,jdbcType=VARCHAR}
+        limit 1
+    </select>
+</mapper>
