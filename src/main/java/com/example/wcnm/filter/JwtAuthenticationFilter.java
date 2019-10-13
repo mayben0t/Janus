@@ -22,9 +22,9 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest req,
                                     HttpServletResponse res,
                                     FilterChain chain) throws IOException, ServletException {
-        String header = req.getHeader("Authorization");
+        String header = req.getHeader("access_token");
 
-        if (header == null || !header.startsWith("Bearer ")) {
+        if (header == null || !header.startsWith("unt ")) {
             chain.doFilter(req, res);
             return;
         }
@@ -40,8 +40,8 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
         if (token != null) {
             // parse the token.
             String user = Jwts.parser()
-                    .setSigningKey("MyJwtSecret")
-                    .parseClaimsJws(token.replace("Bearer ", ""))
+                    .setSigningKey("wcnm")
+                    .parseClaimsJws(token.replace("unt ", ""))
                     .getBody()
                     .getSubject();
 
